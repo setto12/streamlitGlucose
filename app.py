@@ -36,20 +36,20 @@ if uploaded_file is not None:
             continue
 
     if brix_value is not None:
-        # Estimate glucose levels
+        # Estimate glucose levels in mg/L
         def estimate_glucose(fruit, brix):
             if fruit == "Watermelon":
-                return round(brix * 10, 2)
+                return round(brix * 10 * 1000, 2)
             elif fruit == "Apple":
-                return round(brix * 9.5 + 2, 2)
+                return round((brix * 9.5 + 2) * 1000, 2)
             elif fruit == "Guava":
-                return round(brix * 8.8 + 1.5, 2)
+                return round((brix * 8.8 + 1.5) * 1000, 2)
             else:
                 return None
 
         glucose = estimate_glucose(fruit, brix_value)
 
-        # Display result
-        st.markdown(f"### Estimated Glucose for **{fruit}**: **{glucose} g/L**")
+        # Display result in mg/L
+        st.markdown(f"### Estimated Glucose for **{fruit}**: **{glucose} mg/L**")
     else:
         st.markdown("### Could not extract Brix value from the image.")
